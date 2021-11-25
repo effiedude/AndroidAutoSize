@@ -1,12 +1,9 @@
 /*
  * Copyright 2018 JessYan
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,7 +20,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
-
 import cat.ereza.customactivityoncrash.activity.DefaultErrorActivity;
 import cat.ereza.customactivityoncrash.config.CaocConfig;
 import me.jessyan.autosize.AutoSizeConfig;
@@ -45,59 +41,68 @@ import me.jessyan.autosize.internal.CustomAdapt;
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * ================================================
  */
-//实现 CancelAdapt 即可取消当前 Activity 的屏幕适配, 并且这个 Activity 下的所有 Fragment 和 View 都会被取消适配
-//public class MainActivity extends AppCompatActivity implements CancelAdapt {
-public class MainActivity extends AppCompatActivity {
-
+// 实现 CancelAdapt 即可取消当前 Activity 的屏幕适配, 并且这个 Activity 下的所有 Fragment 和 View 都会被取消适配
+// public class MainActivity extends AppCompatActivity implements CancelAdapt {
+public class MainActivity extends AppCompatActivity
+{
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-
+    
     /**
      * 需要注意的是暂停 AndroidAutoSize 后, AndroidAutoSize 只是停止了对后续还没有启动的 {@link Activity} 进行适配的工作
      * 但对已经启动且已经适配的 {@link Activity} 不会有任何影响
      *
-     * @param view {@link View}
+     * @param view
+     * {@link View}
      */
-    public void stop(View view) {
-        Toast.makeText(getApplicationContext(), "AndroidAutoSize stops working!", Toast.LENGTH_SHORT).show();
+    public void stop(View view)
+    {
+        Toast.makeText(getApplicationContext(),"AndroidAutoSize stops working!",Toast.LENGTH_SHORT).show();
         AutoSizeConfig.getInstance().stop(this);
     }
-
+    
     /**
      * 需要注意的是重新启动 AndroidAutoSize 后, AndroidAutoSize 只是重新开始了对后续还没有启动的 {@link Activity} 进行适配的工作
      * 但对已经启动且在 stop 期间未适配的 {@link Activity} 不会有任何影响
      *
-     * @param view {@link View}
+     * @param view
+     * {@link View}
      */
-    public void restart(View view) {
-        Toast.makeText(getApplicationContext(), "AndroidAutoSize continues to work", Toast.LENGTH_SHORT).show();
+    public void restart(View view)
+    {
+        Toast.makeText(getApplicationContext(),"AndroidAutoSize continues to work",Toast.LENGTH_SHORT).show();
         AutoSizeConfig.getInstance().restart();
     }
-
+    
     /**
      * 跳转到 {@link CustomAdaptActivity}, 展示项目内部的 {@link Activity} 自定义适配参数的用法
      *
-     * @param view {@link View}
+     * @param view
+     * {@link View}
      */
-    public void goCustomAdaptActivity(View view) {
-        startActivity(new Intent(getApplicationContext(), CustomAdaptActivity.class));
+    public void goCustomAdaptActivity(View view)
+    {
+        startActivity(new Intent(getApplicationContext(),CustomAdaptActivity.class));
     }
-
+    
     /**
      * 跳转到三方库的 {@link Activity}, 展示项目外部某些三方库的 {@link Activity} 自定义适配参数的用法
      * 跳转前要先在 {@link BaseApplication#customAdaptForExternal()} 中给外部的三方库 {@link Activity} 自定义适配参数
      *
-     * @param view {@link View}
+     * @param view
+     * {@link View}
      */
-    public void goThirdLibraryActivity(View view) {
-        //这里就是随便找个三方库的 Activity, 测试下适配三方库页面的功能是否可用
-        //以下代码就是为了启动这个三方库的 Activity, 不必在意
-        Intent intent = new Intent(getApplicationContext(), DefaultErrorActivity.class);
-        Bundle extras = new Bundle();
-        extras.putSerializable("cat.ereza.customactivityoncrash.EXTRA_CONFIG", CaocConfig.Builder.create().get());
+    public void goThirdLibraryActivity(View view)
+    {
+        // 这里就是随便找个三方库的 Activity, 测试下适配三方库页面的功能是否可用
+        // 以下代码就是为了启动这个三方库的 Activity, 不必在意
+        Intent intent=new Intent(getApplicationContext(),DefaultErrorActivity.class);
+        Bundle extras=new Bundle();
+        extras.putSerializable("cat.ereza.customactivityoncrash.EXTRA_CONFIG",CaocConfig.Builder.create().get());
         intent.putExtras(extras);
         startActivity(intent);
     }

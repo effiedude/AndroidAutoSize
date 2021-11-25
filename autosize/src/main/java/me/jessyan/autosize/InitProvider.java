@@ -1,12 +1,9 @@
 /*
  * Copyright 2018 JessYan
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,13 +12,12 @@
  */
 package me.jessyan.autosize;
 
-import android.content.Context;
 import android.app.Application;
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-
 import me.jessyan.autosize.utils.AutoSizeUtils;
 
 /**
@@ -32,42 +28,47 @@ import me.jessyan.autosize.utils.AutoSizeUtils;
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * ================================================
  */
-public class InitProvider extends ContentProvider {
+public class InitProvider extends ContentProvider
+{
     @Override
-    public boolean onCreate() {
-        Context application = getContext().getApplicationContext();
-        if (application == null) {
-            application = AutoSizeUtils.getApplicationByReflect();
+    public boolean onCreate()
+    {
+        Context application=getContext().getApplicationContext();
+        if(application==null)
+        {
+            application=AutoSizeUtils.getApplicationByReflect();
         }
-        AutoSizeConfig.getInstance()
-                .setLog(true)
-                .init((Application) application)
-                .setUseDeviceSize(false);
+        AutoSizeConfig.getInstance().setLog(true).init((Application)application).setUseDeviceSize(false);
         return true;
     }
-
+    
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(Uri uri,String[] projection,String selection,String[] selectionArgs,String sortOrder)
+    {
         return null;
     }
-
+    
     @Override
-    public String getType(Uri uri) {
+    public String getType(Uri uri)
+    {
         return null;
     }
-
+    
     @Override
-    public Uri insert(Uri uri, ContentValues values) {
+    public Uri insert(Uri uri,ContentValues values)
+    {
         return null;
     }
-
+    
     @Override
-    public int delete(Uri uri, String selection, String[] selectionArgs) {
+    public int delete(Uri uri,String selection,String[] selectionArgs)
+    {
         return 0;
     }
-
+    
     @Override
-    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+    public int update(Uri uri,ContentValues values,String selection,String[] selectionArgs)
+    {
         return 0;
     }
 }
